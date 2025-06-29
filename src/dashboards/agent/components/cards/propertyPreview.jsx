@@ -26,12 +26,9 @@ const PropertyPreview = ({closePreview, id}) => {
                 <div className="">
                     {property.map((prop, index) => {
 
-                        //merge the main image and the gallery image as one
-                        // const image = prop.thu
+                        //store all property images in a new variable
                         const gallery = prop.property_images
-                        // if(!gallery.includes(image)){
-                        //     gallery.unshift(image)
-                        // }
+                        
                         return (
                             <div className="flex flex-col gap-5">
                                 <div className="flex gap-2 h-40 overflow-auto">
@@ -41,15 +38,15 @@ const PropertyPreview = ({closePreview, id}) => {
                                 </div>
                                 <div className="flex flex-col gap-2">
                                     <div className="flex justify-between">
-                                        <h3 className="text-lg font-semibold">{prop.title}</h3>
+                                        <h3 className="text-xl font-semibold">{prop.title}</h3>
                                         <div className="bg-primaryColor rounded-md text-xs left-3 bottom-3 text-white px-2 py-1">
                                             {'\u0024'}{prop.price}
                                         </div>
                                     </div>
-                                    <p className="sm:text-xs text-xs font-light">{prop.desc}</p>
+                                    <p className="sm:text-sm text-sm font-light">{prop.description}</p>
                                     <span className="flex items-center gap-2">
                                         <IoLocationSharp className="text-primaryColor text-lg" />
-                                        <span className="sm:text-xs text-xs font-light">
+                                        <span className="sm:text-sm text-sm font-light">
                                             {prop.location}
                                         </span>
                                     </span>
