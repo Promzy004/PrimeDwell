@@ -1,0 +1,33 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+/* .hero{
+    background: url(./assets/images/hero.png);
+    background-position: center;
+    background-size: cover;
+    filter: brightness(70%);
+} */
+
+.hero::before{
+    content: '';
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    background: url(./assets/images/hero.png);
+    background-position: center;
+    background-size: cover;
+    filter: brightness(70%);
+    z-index: -1;
+}
+
+.hero-input{
+    @apply 
+    focus:outline-none 
+    border 
+    w-full
+    focus:border-primaryColor/50
+    /* border-gray-300  */
+    px-2 py-2
+}
