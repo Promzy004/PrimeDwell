@@ -1,10 +1,10 @@
 import { useContext, useEffect, useState } from "react";
 import { MdHomeWork, MdOutlineFileUpload } from "react-icons/md";
 import { Link } from "react-router-dom";
-import PropertyPreview from "../../agent/components/cards/propertyPreview";
 import AdminPropertyCard from "../components/card/property";
 import { AdminContext } from "../../../context/adminContext";
 import { ClipLoader } from "react-spinners";
+import AdminPropertyPreview from "../components/card/propertyPreview";
 
 
 const DashboardSection = () => {
@@ -67,11 +67,11 @@ const DashboardSection = () => {
                                         e.stopPropagation()
                                         handleUpdate(property.id, 'decline')
                                     }
-                                    return <AdminPropertyCard key={index} image={property.image} title={property.title} desc={property.desc} location={property.location} bed={property.bed} bath={property.bath} rooms={property.room} sq={property.square_meter} price={property.price} id={property.id} pending={property.status} handleApprove={approve} handleDecline={decline} handleClick={() => showPreview(property.id)}  />
+                                    return <AdminPropertyCard key={index} image={property.thumbnail_url} title={property.title} desc={property.description} location={property.location} bed={property.bed} bath={property.bath} rooms={property.room} sq={property.square_meter} price={property.price} id={property.id} pending={property.status} handleApprove={approve} handleDecline={decline} handleClick={() => showPreview(property.id)}  />
                                 } else if (property.status === 'declined') {
-                                    return <AdminPropertyCard key={index} image={property.image} title={property.title} desc={property.desc} location={property.location} bed={property.bed} bath={property.bath} rooms={property.room} sq={property.square_meter} price={property.price} id={property.id} declined={property.status} handleClick={() => showPreview(property.id)}  />
+                                    return <AdminPropertyCard key={index} image={property.thumbnail_url} title={property.title} desc={property.description} location={property.location} bed={property.bed} bath={property.bath} rooms={property.room} sq={property.square_meter} price={property.price} id={property.id} declined={property.status} handleClick={() => showPreview(property.id)}  />
                                 } else {
-                                    return <AdminPropertyCard key={index} image={property.image} title={property.title} desc={property.desc} location={property.location} bed={property.bed} bath={property.bath} rooms={property.room} sq={property.square_meter} price={property.price} id={property.id} approved={property.status} handleClick={() => showPreview(property.id)}  />
+                                    return <AdminPropertyCard key={index} image={property.thumbnail_url} title={property.title} desc={property.description} location={property.location} bed={property.bed} bath={property.bath} rooms={property.room} sq={property.square_meter} price={property.price} id={property.id} approved={property.status} handleClick={() => showPreview(property.id)}  />
                                 }
                             })}
                         </div>
@@ -79,7 +79,7 @@ const DashboardSection = () => {
                 </>
             }
             {showProperty && (
-                <PropertyPreview id={selectedId} closePreview={() => setShowProperty(false)}/>
+                <AdminPropertyPreview id={selectedId} closePreview={() => setShowProperty(false)}/>
             )}
         </div>
     );

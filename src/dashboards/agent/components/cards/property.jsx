@@ -13,7 +13,7 @@ const AgentPropertyCard = ({ image, title, desc, location, bed, bath, rooms, sq,
 
     return (
         <div className="grid grid-cols-1 bg-white drop-shadow-md rounded-md hover:scale-105 duration-500 cursor-pointer" onClick={handleClick}>
-            <div className="h-[7rem] rounded-tr-md rounded-tl-md relative" style={{background: `url(${image})`, backgroundSize: 'cover', backgroundPosition: 'center'}}>
+            <div className="h-[8rem] rounded-tr-md rounded-tl-md relative" style={{background: `url(${image})`, backgroundSize: 'cover', backgroundPosition: 'center'}}>
                 <div className="bg-primaryColor text-xs absolute left-3 bottom-3 text-white px-2 py-1">
                     {'\u0024'}{price}
                 </div>

@@ -4,14 +4,14 @@ import { RiSofaFill } from "react-icons/ri";
 import { BiArea } from "react-icons/bi";
 import { LiaTimesSolid } from "react-icons/lia";
 import { useContext } from "react";
-import { AgentContext } from "../../../../context/agentContext";
+import { AdminContext } from "../../../../context/adminContext";
 
-const PropertyPreview = ({closePreview, id}) => {
+const AdminPropertyPreview = ({closePreview, id}) => {
 
     //passed a prop that get the id of the property been cicked
     const item_id = id
 
-    const { properties } = useContext(AgentContext)
+    const { properties } = useContext(AdminContext)
     console.log(properties)
 
     //get all information of the item been clicked using the id
@@ -85,12 +85,21 @@ const PropertyPreview = ({closePreview, id}) => {
                         )
                     })}
                 </div>
-                <button onClick={closePreview} className="self-end text-primaryColor border-[1.5px] border-primaryColor px-7 py-[2px] rounded-md text-sm mt-4">
-                    Edit
-                </button>
+                {/* {pending && (
+                    <div className="flex gap-3 mx-2 my-2">
+                        <button className="bg-[#60B849] text-sm w-full py-1 text-white rounded-md hover:scale-105 duration-300" onClick={handleApprove}>Approve</button>
+                        <button className="bg-[#B41C11] text-sm w-full py-1 text-white rounded-md hover:scale-105 duration-300" onClick={handleDecline}>Decline</button>
+                    </div>
+                )}
+                {declined && (
+                    <button className="bg-[#828B92] m-2 text-sm py-1 text-white rounded-md">Declined</button>
+                )}
+                {approved && (
+                    <button className="bg-[#828B92] m-2 text-sm py-1 text-white rounded-md">Approved</button>
+                )} */}
             </div>
         </div>
     );
 }
  
-export default PropertyPreview;
+export default AdminPropertyPreview;

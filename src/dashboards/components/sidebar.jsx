@@ -42,7 +42,7 @@ const SideBar = ({menu, setActivePage}) => {
                     {sidebar_menu.map((menu,index) => {
                         const Icon = menu.icon
                         return(
-                            <Link to={menu.href} onClick={() => handleClick((menu.title).toUpperCase())} key={index} className={`flex gap-2 px-4 duration-100 py-2 rounded-md ${pathname == menu.href ? 'bg-primaryColor text-white items-center' : 'text-[#828B92] hover:bg-primaryColor/15'}`}>
+                            <Link to={menu.href} onClick={() => handleClick((menu.title).toUpperCase())} key={index} className={`flex gap-2 px-4 duration-100 py-2 rounded-md ${pathname == menu.href ? 'bg-active-navlink text-white items-center' : 'text-[#828B92] hover:bg-primaryColor/15'}`}>
                                 <Icon className='text-2xl'/>
                                 <span className='text-lg'>{menu.title}</span>
                             </Link>
