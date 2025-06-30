@@ -6,13 +6,12 @@ import { LiaTimesSolid } from "react-icons/lia";
 import { useContext } from "react";
 import { AdminContext } from "../../../../context/adminContext";
 
-const AdminPropertyPreview = ({closePreview, id}) => {
+const AdminPropertyPreview = ({closePreview, id, pending, declined, approved, handleDecline, handleApprove}) => {
 
     //passed a prop that get the id of the property been cicked
     const item_id = id
 
     const { properties } = useContext(AdminContext)
-    console.log(properties)
 
     //get all information of the item been clicked using the id
     const property = properties.filter(property => property.id === item_id)
@@ -85,7 +84,7 @@ const AdminPropertyPreview = ({closePreview, id}) => {
                         )
                     })}
                 </div>
-                {/* {pending && (
+                {pending && (
                     <div className="flex gap-3 mx-2 my-2">
                         <button className="bg-[#60B849] text-sm w-full py-1 text-white rounded-md hover:scale-105 duration-300" onClick={handleApprove}>Approve</button>
                         <button className="bg-[#B41C11] text-sm w-full py-1 text-white rounded-md hover:scale-105 duration-300" onClick={handleDecline}>Decline</button>
@@ -96,7 +95,7 @@ const AdminPropertyPreview = ({closePreview, id}) => {
                 )}
                 {approved && (
                     <button className="bg-[#828B92] m-2 text-sm py-1 text-white rounded-md">Approved</button>
-                )} */}
+                )}
             </div>
         </div>
     );

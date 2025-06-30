@@ -16,14 +16,23 @@ const DashboardSection = () => {
     //state that handles property modal preview of the selected property
     const [showProperty, setShowProperty] = useState(false)
 
+    //destructure the admin context to get this information
     const { properties, fetching, handleUpdate } = useContext(AdminContext)
 
 
     //opens the modal preview
     const showPreview = (id) => {
+        
+        //shows the property preview to true
         setShowProperty(true);
+
+        //store the id of the property been clicked
         setSelectedId(id)
     }
+
+    //store the property of the clicked items in a property variable
+    const property = properties.find(p => p.id === selectedId)
+    
 
     //useEfect use to th body overflow
     useEffect(() => {
@@ -41,7 +50,27 @@ const DashboardSection = () => {
         }
     }, [showProperty])
 
-    // if (fetching) return <ClipLoader color="#3498db" loading={loading} size={30} />
+    //function that turns a property to approved if the approve button in preview is clicked
+    const previewApprove = (e) => {
+
+        //runs the handleUpadte funtion in the admin context so as to send a request to backend to update the
+        //property status to approved
+        handleUpdate(property.id, 'approve')
+
+        //close preview if approve button is clicked
+        setShowProperty(false)
+    }
+
+    //function that turns a property to declined if the decline button in preview is clicked
+    const previewDecline = (e) => {
+
+        //runs the handleUpadte funtion in the admin context so as to send a request to backend to update the
+        //property status to declined
+        handleUpdate(property.id, 'decline')
+
+        //close preview if deline button is clicked
+        setShowProperty(false)
+    }
 
     return (
         <div className="relative">
@@ -78,8 +107,21 @@ const DashboardSection = () => {
                     }
                 </>
             }
+
+            {/* preview property that is clicked, conditionally rendering to know what button to display in  */}
+            {/* in the preview e.g approve and decline button if status pending  */}
             {showProperty && (
-                <AdminPropertyPreview id={selectedId} closePreview={() => setShowProperty(false)}/>
+                <div>
+                    {property.status === 'pending' ?
+                        <AdminPropertyPreview id={selectedId} handleApprove={previewApprove} handleDecline={previewDecline} pending={property.status} closePreview={() => setShowProperty(false)}/>
+                        : property.status === 'declined' ?
+                        <AdminPropertyPreview id={selectedId} declined={property.status} closePreview={() => setShowProperty(false)}/>
+                        : property.status === 'approved' ?
+                        <AdminPropertyPreview id={selectedId} approved={property.status} closePreview={() => setShowProperty(false)}/>
+                        :
+                        null    
+                    }
+                </div>
             )}
         </div>
     );
@@ -102,10 +144,6 @@ export const MenuBar = ({handleUpload}) => {
                 <Link onClick={() => setStatus('pending')} className={`px-2 pb-1 ${status == 'pending' ? 'text-[#FF9800] border-b border-[#FF9800] bg-white text-sm  ' : 'text-sm text-[#828B92]'}`}>Pending</Link>
                 <Link onClick={() => setStatus('declined')} className={`px-2 pb-1 ${status == 'declined' ? 'text-[#B41C11] border-b border-[#B41C11] bg-white text-sm  ' : 'text-sm text-[#828B92]'}`}>Declined</Link>
             </div>
-            {/* <button className="flex px-6 py-2 items-center gap-1 text-white bg-primaryColor rounded-md" onClick={handleUpload}>
-                <MdOutlineFileUpload className="text-xl" />
-                <span>Upload</span>
-            </button> */}
         </div>
     )
 }
