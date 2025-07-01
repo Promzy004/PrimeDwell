@@ -51,8 +51,8 @@ function App() {
               <Route path="/about" element={<About />} />
               <Route path="/faqs" element={<FAQs />} />
 
-              <Route path="/" element={<Home />}/>
               <Route element={<ProtectedRoute allowedRoles={['buyer']} />} >
+                <Route path="/" element={<Home />}/>
                 <Route path="/property-details/:id" element={<PropertyDetails />} />
                 <Route path="/agent-details/:id" element={<AgentDetails />} />
               </Route>
