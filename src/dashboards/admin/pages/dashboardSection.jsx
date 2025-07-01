@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react";
-import { MdHomeWork, MdOutlineFileUpload } from "react-icons/md";
+import { MdHomeWork } from "react-icons/md";
 import { Link } from "react-router-dom";
 import AdminPropertyCard from "../components/card/property";
 import { AdminContext } from "../../../context/adminContext";
@@ -17,7 +17,7 @@ const DashboardSection = () => {
     const [showProperty, setShowProperty] = useState(false)
 
     //destructure the admin context to get this information
-    const { properties, fetching, handleUpdate } = useContext(AdminContext)
+    const { properties, fetching, handleUpdate, page, setPage, perPage, totalPage, from, to } = useContext(AdminContext)
 
 
     //opens the modal preview
@@ -72,6 +72,36 @@ const DashboardSection = () => {
         setShowProperty(false)
     }
 
+    //funtion used to get the number of pagination that would be required based on the total items and item per page
+    const pagination = (totalnumber, number) => {
+        const result = []
+        for (let s=1; totalnumber >= 1; s++) {
+            //push numbers according to how many times number will be subtracted from totalnumber to get less than 1
+            result.push(s)
+            totalnumber = totalnumber - number
+        }
+
+        //return the values pushed, would be like [1,2,3,4, ...]
+        return result
+    }
+
+    //stores the pagination funtion returned values to a variable
+    const paginate_values = pagination(totalPage,perPage)
+
+    //funtion to handle prev button for pagination
+    const handlePrev = () => {
+        if (page > 1) {
+            setPage(prev => prev - 1)
+        }
+    }
+
+    //funtion to handle next button for pagination
+    const handleNext = () => {
+        if (page < paginate_values.length) {
+            setPage(prev => prev + 1)
+        }
+    }
+
     return (
         <div className="relative">
             <MenuBar/>
@@ -107,6 +137,28 @@ const DashboardSection = () => {
                     }
                 </>
             }
+            {/* {!fetching && (
+                <div className="flex justify-between items-center mb-12 mt-16">
+                    <div className="text-[#444] text-sm">Showing {from} to {to} of {totalPage} results</div>
+                    <div className="flex justify-center items-center drop-shadow-sm">
+                        <button className={`px-5 py-1 border border-[#dadada] text-sm rounded-l-md text-center hover:bg-[#e0e0e0] duration-300 ${page < 2 ? 'bg-[#f9f9f9] text-[#AAAAAA] cursor-not-allowed' : 'text-[#444] bg-[#f1f1f1]' }`} onClick={handlePrev}>prev</button>
+                        {paginate_values.map((paginate, index)=> (
+                            <button key={index} className={`px-5 py-1 text-sm border border-[#dadada] duration-300 ${paginate === page ? 'bg-primaryColor text-white': 'bg-[#f1f1f1] hover:bg-[#e0e0e0] text-[#444]'}`} onClick={()=> setPage(paginate)}>{paginate}</button>
+                        ))}
+                        <button className={`px-5 py-1 border border-[#dadada] text-sm rounded-r-md text-center hover:bg-[#e0e0e0] duration-300 ${page === paginate_values.length ? 'bg-[#f9f9f9] text-[#AAAAAA] cursor-not-allowed' : 'text-[#444] bg-[#f1f1f1]' }`} onClick={handleNext}>next</button>
+                    </div>
+                </div>
+            )} */}
+            <div className="flex justify-between items-center mb-12 mt-16">
+                <div className="text-[#444] text-sm">Showing {from} to {to} of {totalPage} results</div>
+                <div className="flex justify-center items-center drop-shadow-sm">
+                    <button className={`px-5 py-1 border border-[#dadada] text-sm rounded-l-md text-center hover:bg-[#e0e0e0] duration-300 ${page < 2 ? 'bg-[#f9f9f9] text-[#AAAAAA] cursor-not-allowed' : 'text-[#444] bg-[#f1f1f1]' }`} onClick={handlePrev}>prev</button>
+                    {paginate_values.map((paginate, index)=> (
+                        <button key={index} className={`px-5 py-1 text-sm border border-[#dadada] duration-300 ${paginate === page ? 'bg-primaryColor text-white': 'bg-[#f1f1f1] hover:bg-[#e0e0e0] text-[#444]'}`} onClick={()=> setPage(paginate)}>{paginate}</button>
+                    ))}
+                    <button className={`px-5 py-1 border border-[#dadada] text-sm rounded-r-md text-center hover:bg-[#e0e0e0] duration-300 ${page === paginate_values.length ? 'bg-[#f9f9f9] text-[#AAAAAA] cursor-not-allowed' : 'text-[#444] bg-[#f1f1f1]' }`} onClick={handleNext}>next</button>
+                </div>
+            </div>
 
             {/* preview property that is clicked, conditionally rendering to know what button to display in  */}
             {/* in the preview e.g approve and decline button if status pending  */}

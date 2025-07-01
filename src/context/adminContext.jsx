@@ -14,6 +14,21 @@ const AdminContextProvider = ({children}) => {
     const { loading } = useContext(AuthContext);
     const [ updateTrigger, setUpdateTrigger ] = useState(0)
 
+    //state to a particular page that would be used to request from backend
+    const [ page, setPage ] = useState(1)
+
+    //state to store the limit range for each page
+    const [ perPage, setPerPage ] = useState(1)
+
+    //state to store the total items in of all page
+    const [ totalPage, setTotalPage ] = useState(0)
+
+    //state to store the beginning of each page
+    const [ from, setFrom ] = useState(0)
+    
+    //state to store the total count for each page
+    const [ to, setTo ] = useState(0)
+
     const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms))
 
     const fetchProperties = async (signal) => {
@@ -22,14 +37,18 @@ const AdminContextProvider = ({children}) => {
         await delay(2000)
 
         try{
-            const response = await axios.get(`http://127.0.0.1:8000/api/admin-all-properties`,{
+            //request to get all properties for admin
+            const response = await axios.get(`http://127.0.0.1:8000/api/admin-all-properties?page=${page}`,{
                 params: {
                     status: status
                 },
                 signal: signal
             })
             setProperties(response?.data?.property?.data)
-            console.log(properties)
+            setTotalPage(response.data.property.total)
+            setPerPage(response.data.property.per_page)
+            setFrom(response.data.property.from)
+            setTo(response.data.property.to)
             setFetching(false);
         } catch (error) {
             console.log(error)
@@ -43,7 +62,7 @@ const AdminContextProvider = ({children}) => {
         }
 
         return () => controller.abort()
-    }, [status, update, loading, updateTrigger ])
+    }, [status, update, loading, updateTrigger, page ])
 
 
     //update Properties function
@@ -60,7 +79,7 @@ const AdminContextProvider = ({children}) => {
     }
 
     return (
-        <AdminContext.Provider value={{setStatus, status, properties, setUpdate, fetching, handleUpdate}}>
+        <AdminContext.Provider value={{setStatus, status, properties, setUpdate, fetching, handleUpdate , setPage, page, perPage, totalPage, from, to}}>
             {children}
         </AdminContext.Provider>
     );
