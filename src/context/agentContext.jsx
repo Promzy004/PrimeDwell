@@ -13,6 +13,21 @@ const AgentContextProvider = ({children}) => {
     const { loading, user } = useContext(AuthContext);
     const [ fetching, setFetching ] = useState(true)
 
+    //state to a particular page that would be used to request from backend
+    const [ page, setPage ] = useState(1)
+
+    //state to store the limit range for each page
+    const [ perPage, setPerPage ] = useState(1)
+
+    //state to store the total items in of all page
+    const [ totalPage, setTotalPage ] = useState(0)
+
+    //state to store the beginning of each page
+    const [ from, setFrom ] = useState(0)
+    
+    //state to store the total count for each page
+    const [ to, setTo ] = useState(0)
+
 
 
     const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms))
@@ -23,11 +38,14 @@ const AgentContextProvider = ({children}) => {
         const agentId = user.id
         await delay(2000)
         try{
-            const response = await axios.get(`http://127.0.0.1:8000/api/agent-properties/${agentId}?status=${status}`, {
+            const response = await axios.get(`http://127.0.0.1:8000/api/agent-properties/${agentId}?status=${status}&page=${page}`, {
                 signal: signal
             })
             setProperties(response?.data?.property?.data)
-            console.log(properties)
+            setTotalPage(response.data.property.total)
+            setPerPage(response.data.property.per_page)
+            setFrom(response.data.property.from)
+            setTo(response.data.property.to)
             setFetching(false)
         } catch (error) {
             console.log(error)
@@ -48,7 +66,7 @@ const AgentContextProvider = ({children}) => {
 
 
     return (
-        <AgentContext.Provider value={{setStatus, status, properties, setUpdate, fetching}}>
+        <AgentContext.Provider value={{setStatus, status, properties, setUpdate, fetching, setPage, page, perPage, totalPage, from, to}}>
             {children}
         </AgentContext.Provider>
     );

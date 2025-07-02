@@ -12,13 +12,13 @@ const AgentPropertyCard = ({ image, title, desc, location, bed, bath, rooms, sq,
 
 
     return (
-        <div className="grid grid-cols-1 bg-white drop-shadow-md rounded-md hover:scale-105 duration-500 cursor-pointer" onClick={handleClick}>
+        <div className="grid grid-cols-1 bg-white drop-shadow-md break-words whitespace-normal rounded-md hover:scale-105 duration-500 cursor-pointer" style={{hyphens: 'auto'}} onClick={handleClick}>
             <div className="h-[8rem] rounded-tr-md rounded-tl-md relative" style={{background: `url(${image})`, backgroundSize: 'cover', backgroundPosition: 'center'}}>
                 <div className="bg-primaryColor text-xs absolute left-3 bottom-3 text-white px-2 py-1">
                     {'\u0024'}{price}
                 </div>
             </div>
-            <div className="px-3 md:py-2 py-4 flex flex-col md:gap-2 gap-2">
+            <div className="px-3 md:py-2 py-4 flex flex-col md:gap-3 gap-2">
                 <h3 className="sm:text-base text-base font-medium">{title}</h3>
                 <p className="sm:text-xs text-xs font-light">{desc}</p>
                 <span className="flex items-center gap-2">
@@ -28,7 +28,7 @@ const AgentPropertyCard = ({ image, title, desc, location, bed, bath, rooms, sq,
                     </span>
                 </span>
                 <div className="w-full h-[1px] bg-neutral-300"></div>
-                <div className="flex flex-wrap lg:gap-3 md:gap-2 gap-3">
+                <div className="flex flex-wrap lg:gap-x-3 lg:gap-y-2 md:gap-2 gap-3">
                     <span className="flex justify-center items-center gap-2">
                         <IoBed className="text-primaryColor text-base" />
                         <span className="sm:text-xs text-xs font-light">

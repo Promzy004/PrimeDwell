@@ -40,6 +40,7 @@ function App() {
                 {/* Routes that can't be seen when logged in */}
               <Route element={<PublicRoute />}>
                 {/* <Route path="/" element={<Home />}/> */}
+                <Route path="/" element={<Home />}/>
                 <Route path="/register" element={<Register />} />
                 <Route path="/login" element={<Login />} />
               </Route>
@@ -52,7 +53,6 @@ function App() {
               <Route path="/faqs" element={<FAQs />} />
 
               <Route element={<ProtectedRoute allowedRoles={['buyer']} />} >
-                <Route path="/" element={<Home />}/>
                 <Route path="/property-details/:id" element={<PropertyDetails />} />
                 <Route path="/agent-details/:id" element={<AgentDetails />} />
               </Route>

@@ -137,7 +137,7 @@ const DashboardSection = () => {
                     }
                 </>
             }
-            {/* {!fetching && (
+            {properties.length > 15 && (
                 <div className="flex justify-between items-center mb-12 mt-16">
                     <div className="text-[#444] text-sm">Showing {from} to {to} of {totalPage} results</div>
                     <div className="flex justify-center items-center drop-shadow-sm">
@@ -148,8 +148,8 @@ const DashboardSection = () => {
                         <button className={`px-5 py-1 border border-[#dadada] text-sm rounded-r-md text-center hover:bg-[#e0e0e0] duration-300 ${page === paginate_values.length ? 'bg-[#f9f9f9] text-[#AAAAAA] cursor-not-allowed' : 'text-[#444] bg-[#f1f1f1]' }`} onClick={handleNext}>next</button>
                     </div>
                 </div>
-            )} */}
-            <div className="flex justify-between items-center mb-12 mt-16">
+            )}
+            {/* <div className="flex justify-between items-center mb-12 mt-16">
                 <div className="text-[#444] text-sm">Showing {from} to {to} of {totalPage} results</div>
                 <div className="flex justify-center items-center drop-shadow-sm">
                     <button className={`px-5 py-1 border border-[#dadada] text-sm rounded-l-md text-center hover:bg-[#e0e0e0] duration-300 ${page < 2 ? 'bg-[#f9f9f9] text-[#AAAAAA] cursor-not-allowed' : 'text-[#444] bg-[#f1f1f1]' }`} onClick={handlePrev}>prev</button>
@@ -158,7 +158,7 @@ const DashboardSection = () => {
                     ))}
                     <button className={`px-5 py-1 border border-[#dadada] text-sm rounded-r-md text-center hover:bg-[#e0e0e0] duration-300 ${page === paginate_values.length ? 'bg-[#f9f9f9] text-[#AAAAAA] cursor-not-allowed' : 'text-[#444] bg-[#f1f1f1]' }`} onClick={handleNext}>next</button>
                 </div>
-            </div>
+            </div> */}
 
             {/* preview property that is clicked, conditionally rendering to know what button to display in  */}
             {/* in the preview e.g approve and decline button if status pending  */}
