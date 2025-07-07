@@ -23,22 +23,22 @@ const BuyerDashboard = () => {
         {
             icon: FaUserFriends,
             title: 'Contacts',
-            href: 'buyer-dashboard/contact'
+            href: '/buyer-dashboard/contact'
         },
         {
             icon: BiSolidUser,
             title: 'Favorite',
-            href: 'buyer-dashboard/favorite'
+            href: '/buyer-dashboard/favorite'
         },
         {
             icon: BiSolidUser,
             title: 'Agents',
-            href: 'buyer-dashboard/agent-details'
+            href: '/buyer-dashboard/agent-details'
         },
         {
             icon: BiSolidUser,
             title: 'Profile',
-            href: 'buyer-dashboard/profile'
+            href: '/buyer-dashboard/profile'
         },
     ]
 
