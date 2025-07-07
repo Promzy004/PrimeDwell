@@ -3,12 +3,16 @@ import NavBar from "../components/navbar";
 import SideBar from "../components/sidebar";
 import { BiSolidDashboard, BiSolidUser } from "react-icons/bi";
 import { FaUserFriends } from "react-icons/fa";
-import { useState } from "react";
-import ImagePreview from "./components/imagePreview";
+import { useContext, useState } from "react";
+import { BuyerContext } from "../../context/buyerContext";
+import PropertyImagePreview from "./components/propertyImagePreview";
 
 const BuyerDashboard = () => {
 
     const [activePage, setActivePage] = useState('Dashboard')
+
+    //get the proprty image preview value so as to show preview if true and close preview if false
+    const { propertyImagePreview } = useContext(BuyerContext)
 
     const sidebar_menu = [
         {
@@ -40,7 +44,9 @@ const BuyerDashboard = () => {
 
     return (
         <div className="pl-72">
-            <ImagePreview />
+            {propertyImagePreview && (
+                <PropertyImagePreview />
+            )}
             <SideBar menu={sidebar_menu} setActivePage={setActivePage} />
             <NavBar activePage={activePage} />
             <div className="px-14 mt-[96px]">

@@ -6,6 +6,7 @@ import { ClipLoader } from "react-spinners";
 import BuyerPropertyCard from "../components/PropertyCard";
 import BuyerPropertyPreview from "../components/propertyPreview";
 import { properties } from "../../../assets/data/data";
+import { BuyerContext } from "../../../context/buyerContext";
 
 const DashboardContent = () => {
 
@@ -19,6 +20,9 @@ const DashboardContent = () => {
 
     //state that handle the modal property upload
     const [showUploadd, setShowUpload] = useState(false)
+
+    //gets the set property image preview so as to set it true when images is clicked, then displays the previews
+    const { setPropertyImagePreview } = useContext(BuyerContext)
 
     //opens the modal preview
     const showPreview = (id) => {
@@ -52,7 +56,7 @@ const DashboardContent = () => {
                 ))}
             </div>
             {showProperty && (
-                <BuyerPropertyPreview id={selectedId} closePreview={() => setShowProperty(false)}/>
+                <BuyerPropertyPreview id={selectedId} closePreview={() => setShowProperty(false)} handleImagesClick={() => setPropertyImagePreview(true)}/>
             )}
         </div>
     );

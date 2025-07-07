@@ -5,8 +5,9 @@ import { BiArea } from "react-icons/bi";
 import { LiaTimesSolid } from "react-icons/lia";
 import { useContext } from "react";
 import { properties } from "../../../assets/data/data";
+import { MdFavoriteBorder } from "react-icons/md";
 
-const BuyerPropertyPreview = ({closePreview, id}) => {
+const BuyerPropertyPreview = ({closePreview, id, handleImagesClick}) => {
 
     //passed a prop that get the id of the property been cicked
     const item_id = id
@@ -28,7 +29,7 @@ const BuyerPropertyPreview = ({closePreview, id}) => {
                         
                         return (
                             <div className="flex flex-col gap-5" key={index}>
-                                <div className="flex gap-2 cursor-pointer h-40 overflow-auto hover:border-2 hover:border-primaryColor" onClick={'j'}>
+                                <div className="flex gap-2 cursor-pointer h-40 overflow-auto hover:border-2 hover:border-primaryColor" onClick={handleImagesClick}>
                                     {gallery.map((gal, index) => (
                                         <img key={index} src={gal} alt="" className="rounded-md" />
                                     ))}
@@ -48,42 +49,47 @@ const BuyerPropertyPreview = ({closePreview, id}) => {
                                         </span>
                                     </span>
                                     <div className="w-full h-[1px] bg-neutral-300"></div>
-                                    <div className="flex flex-wrap lg:gap-3 md:gap-2 gap-3">
-                                        <span className="flex justify-center items-center gap-2">
-                                            <IoBed className="text-primaryColor text-base" />
-                                            <span className="sm:text-xs text-xs font-light">
-                                                {prop.bed} Bed
+                                    <div className="flex justify-between">
+                                        <div className="flex flex-wrap lg:gap-3 md:gap-2 gap-3">
+                                            <span className="flex justify-center items-center gap-2">
+                                                <IoBed className="text-primaryColor text-base" />
+                                                <span className="sm:text-xs text-xs font-light">
+                                                    {prop.bed} Bed
+                                                </span>
+                                                <div className="h-full w-[1px] bg-neutral-300 md:ml-0 ml-3 md:mr-0 mr-2"></div>
                                             </span>
-                                            <div className="h-full w-[1px] bg-neutral-300 md:ml-0 ml-3 md:mr-0 mr-2"></div>
-                                        </span>
-                                        <span className="flex justify-center items-center gap-2">
-                                            <FaBath className="text-primaryColor" />
-                                            <span className="sm:text-xs text-xs font-light">
-                                                {prop.bath} Bath
+                                            <span className="flex justify-center items-center gap-2">
+                                                <FaBath className="text-primaryColor" />
+                                                <span className="sm:text-xs text-xs font-light">
+                                                    {prop.bath} Bath
+                                                </span>
+                                                <div className="h-full w-[1px] bg-neutral-300 md:ml-0 ml-3 md:mr-0 mr-2"></div>
                                             </span>
-                                            <div className="h-full w-[1px] bg-neutral-300 md:ml-0 ml-3 md:mr-0 mr-2"></div>
-                                        </span>
-                                        <span className="flex justify-center items-center gap-2">
-                                            <RiSofaFill className="text-primaryColor" />
-                                            <span className="sm:text-xs text-xs font-light">
-                                                {prop.room} Rooms
+                                            <span className="flex justify-center items-center gap-2">
+                                                <RiSofaFill className="text-primaryColor" />
+                                                <span className="sm:text-xs text-xs font-light">
+                                                    {prop.room} Rooms
+                                                </span>
+                                                <div className="h-full w-[1px] bg-neutral-300 md:ml-0 ml-3 md:mr-0 mr-2"></div>
                                             </span>
-                                            <div className="h-full w-[1px] bg-neutral-300 md:ml-0 ml-3 md:mr-0 mr-2"></div>
-                                        </span>
-                                        <span className="flex justify-center items-center gap-2">
-                                            <BiArea className="text-primaryColor" />
-                                            <span className="sm:text-xs text-xs font-light">
-                                                {prop.square_meter} sq
+                                            <span className="flex justify-center items-center gap-2">
+                                                <BiArea className="text-primaryColor" />
+                                                <span className="sm:text-xs text-xs font-light">
+                                                    {prop.square_meter} sq
+                                                </span>
                                             </span>
-                                        </span>
+                                        </div>
+                                        <button className="right-4 top-4 hover:text-black">
+                                            <MdFavoriteBorder className="text-[#DA5C5C] text-3xl hover:scale-125 duration-200" />
+                                        </button>
                                     </div>
                                 </div>
                             </div>
                         )
                     })}
                 </div>
-                <button onClick={closePreview} className="self-end text-primaryColor border-[1.5px] border-primaryColor px-7 py-[2px] rounded-md text-sm mt-4">
-                    Edit
+                <button onClick={closePreview} className="self-end border-[1.5px] text-white border-none bg-primaryColor px-7 py-[3px] rounded-md text-sm mt-4">
+                    Contact Agent
                 </button>
             </div>
         </div>
