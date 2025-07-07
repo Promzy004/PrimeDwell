@@ -34,6 +34,7 @@ const SideBar = ({menu, setActivePage}) => {
 
     const sidebar_menu = menu
 
+
     return (
         <div className='w-72 h-screen z-20 fixed left-0 top-0 bg-white drop-shadow-md flex flex-col justify-between py-10 px-8'>
             <div className='flex flex-col gap-16'>

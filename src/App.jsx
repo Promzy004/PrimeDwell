@@ -16,7 +16,6 @@ import AgentDashboard from "./dashboards/agent/agentDashboard"
 import Dashboard from "./dashboards/agent/pages/dashboard"
 import AgentBuyers from "./dashboards/agent/pages/buyers"
 import AgentProfile from "./dashboards/agent/pages/agentProfile"
-import DashboardContent from "./dashboards/admin/pages/dashboardSection"
 import AdminDashboard from "./dashboards/admin/adminDashboard"
 import Users from "./dashboards/admin/pages/users"
 import AdminProfile from "./dashboards/admin/pages/adminProfile"
@@ -26,6 +25,12 @@ import PublicRoute from "./publicRoute"
 import AuthContextProvider from "./context/authContext"
 import AgentContextProvider from "./context/agentContext"
 import AdminContextProvider from "./context/adminContext"
+import BuyerDashboard from "./dashboards/buyer/buyerDashboard"
+import DashboardContent from "./dashboards/buyer/pages/dashboardContent"
+import Favorite from "./dashboards/buyer/pages/favorite"
+import ContactUs from "./dashboards/buyer/pages/contact"
+import DashboardAgentDetails from "./dashboards/buyer/pages/agentDetails"
+import BuyerProfile from "./dashboards/buyer/pages/buyerProfile"
 
 
 function App() {
@@ -46,7 +51,7 @@ function App() {
               </Route>
               <Route path="/agents" element={<Agents />} />
               <Route path="/properties" element={<Properties />} />
-              <Route path="/agent-details/:id" element={<Error404 />} />
+              {/* <Route path="/agent-details/:id" element={<Error404 />} /> */}
               <Route path="*" element={<Error404 />} />
               <Route path="/contact" element={<Contact />} />
               <Route path="/about" element={<About />} />
@@ -55,6 +60,16 @@ function App() {
               <Route element={<ProtectedRoute allowedRoles={['buyer']} />} >
                 <Route path="/property-details/:id" element={<PropertyDetails />} />
                 <Route path="/agent-details/:id" element={<AgentDetails />} />
+              </Route>
+
+              <Route path="/" element={<BuyerDashboard />}>
+                <Route path="buyer-dashboard" element={<DashboardContent />} />
+                <Route path="buyer-dashboard/favorite" element={<Favorite />} />
+                <Route path="buyer-dashboard/contact" element={<ContactUs />} />
+                <Route path="buyer-dashboard/agent-details" element={<DashboardAgentDetails />} />
+                <Route path="buyer-dashboard/profile" element={<BuyerProfile />} />
+                {/* <Route path="agent-dashboard/buyers" element={<AgentBuyers />} />
+                <Route path="agent-dashboard/profile" element={<AgentProfile />} /> */}
               </Route>
 
             
