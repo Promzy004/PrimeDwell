@@ -29,7 +29,7 @@ const BuyerPropertyPreview = ({closePreview, id, handleImagesClick}) => {
                         
                         return (
                             <div className="flex flex-col gap-5" key={index}>
-                                <div className="flex gap-2 cursor-pointer h-40 overflow-auto hover:border-2 hover:border-primaryColor" onClick={handleImagesClick}>
+                                <div className="flex gap-2 cursor-pointer h-40 overflow-auto hover:border-2 hover:border-primaryColor" onClick={() => handleImagesClick(gallery)}>
                                     {gallery.map((gal, index) => (
                                         <img key={index} src={gal} alt="" className="rounded-md" />
                                     ))}

@@ -14,13 +14,15 @@ import { BuyerContext } from "../../../context/buyerContext";
 const PropertyImagePreview = () => {
 
     const [index, setIndex] = useState(0)
+    const { propertyImagePreview } = useContext(BuyerContext)
 
     //used to track the direction a next image enters from and prev image enters from
     const [direction, setDirection] = useState('next')
 
     //fetches the setpropertypreview from context so as to use it to close preview when close button is clicked 
-    const { setPropertyImagePreview } = useContext(BuyerContext)
-    const images = [gallery1, gallery2, gallery3, gallery4, gallery5, gallery6]
+
+    // gets the property images been added to the state in the BuyerContext from dashboardContent
+    const images = propertyImagePreview
     console.log(images)
 
     const handleNext = () => {

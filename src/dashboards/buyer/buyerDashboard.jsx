@@ -44,7 +44,7 @@ const BuyerDashboard = () => {
 
     return (
         <div className="pl-72">
-            {propertyImagePreview && (
+            {propertyImagePreview.length > 0 && (
                 <PropertyImagePreview />
             )}
             <SideBar menu={sidebar_menu} setActivePage={setActivePage} />

@@ -6,7 +6,8 @@ export const BuyerContext = createContext()
 
 const BuyerContextProvider = ({children}) => {
 
-    const [ propertyImagePreview, setPropertyImagePreview ] = useState(false)
+    const [ propertyImagePreview, setPropertyImagePreview ] = useState([])
+    const [ showPropertyImagePreview, setShowPropertyImagePeview ] = useState()
     // const [status, setStatus] = useState('all')
     // const [update, setUpdate] = useState('')
     // const [properties, setProperties] = useState([])
@@ -66,6 +67,8 @@ const BuyerContextProvider = ({children}) => {
     // }, [status, update, loading])
 
     // setStatus, status, properties, setUpdate, fetching, setPage, page, perPage, totalPage, from, to, 
+
+    // const handleImagesClick
 
 
     return (

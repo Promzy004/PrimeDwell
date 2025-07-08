@@ -24,10 +24,17 @@ const DashboardContent = () => {
     //gets the set property image preview so as to set it true when images is clicked, then displays the previews
     const { setPropertyImagePreview } = useContext(BuyerContext)
 
-    //opens the modal preview
+    //opens the modal property preview
     const showPreview = (id) => {
         setShowProperty(true);
         setSelectedId(id)
+    }
+
+    // function added to the prop created in the property preview, gets the gallery image passed as parameter 
+    // through the funtion prop in property preview and gets it here as images argument, which is then used to set
+    // the propertyImagesPreview state
+    const handlePreviewImages = (images) => {
+        setPropertyImagePreview(images)
     }
 
     //useEfect use to th body overflow
@@ -56,7 +63,7 @@ const DashboardContent = () => {
                 ))}
             </div>
             {showProperty && (
-                <BuyerPropertyPreview id={selectedId} closePreview={() => setShowProperty(false)} handleImagesClick={() => setPropertyImagePreview(true)}/>
+                <BuyerPropertyPreview id={selectedId} closePreview={() => setShowProperty(false)} handleImagesClick={handlePreviewImages}/>
             )}
         </div>
     );
