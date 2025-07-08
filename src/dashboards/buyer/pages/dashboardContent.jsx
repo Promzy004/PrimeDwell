@@ -72,7 +72,7 @@ const DashboardContent = () => {
 export default DashboardContent;
 
 
-export const MenuBar = ({handleUpload}) => {
+export const MenuBar = () => {
 
     //state that handles the active menu link
     // const [isActive, setIsActive] = useState('all')

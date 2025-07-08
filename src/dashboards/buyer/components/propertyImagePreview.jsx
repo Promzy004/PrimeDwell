@@ -1,10 +1,4 @@
 import { LiaTimesSolid } from "react-icons/lia";
-import gallery1 from "../../../assets/images/gallery/gallery1.png";
-import gallery2 from "../../../assets/images/gallery/gallery2.png";
-import gallery3 from "../../../assets/images/gallery/gallery3.png";
-import gallery4 from "../../../assets/images/gallery/gallery4.png";
-import gallery5 from "../../../assets/images/gallery/gallery5.png";
-import gallery6 from "../../../assets/images/gallery/gallery6.png";
 import { useContext, useState } from "react";
 import { GrCaretNext, GrCaretPrevious } from "react-icons/gr";
 import { AnimatePresence, motion } from "framer-motion";
@@ -14,7 +8,7 @@ import { BuyerContext } from "../../../context/buyerContext";
 const PropertyImagePreview = () => {
 
     const [index, setIndex] = useState(0)
-    const { propertyImagePreview } = useContext(BuyerContext)
+    const { propertyImagePreview, setPropertyImagePreview } = useContext(BuyerContext)
 
     //used to track the direction a next image enters from and prev image enters from
     const [direction, setDirection] = useState('next')
@@ -23,7 +17,6 @@ const PropertyImagePreview = () => {
 
     // gets the property images been added to the state in the BuyerContext from dashboardContent
     const images = propertyImagePreview
-    console.log(images)
 
     const handleNext = () => {
         if(index < (images.length - 1)) {
@@ -46,7 +39,7 @@ const PropertyImagePreview = () => {
                     <GrCaretPrevious className="text-2xl" />
                 </button>
                 <div className="h-full w-auto flex flex-col justify-center overflow-hidden items-center">
-                    <button title="close" className="text-white self-end mr-8" onClick={() => setPropertyImagePreview(false)}>
+                    <button title="close" className="text-white self-end mr-8" onClick={() => setPropertyImagePreview([])}>
                         <LiaTimesSolid className="text-lg font-extrabold text-[#B41C11]" />
                     </button>
                     
@@ -67,6 +60,7 @@ const PropertyImagePreview = () => {
                     <GrCaretNext className="text-2xl" />
                 </button>
             </div>
+            <span>{index + 1}/{propertyImagePreview.length}</span>
         </div>
     );
 }
