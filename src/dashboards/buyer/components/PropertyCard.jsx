@@ -17,7 +17,6 @@ const BuyerPropertyCard = ({ image, title, desc, location, bed, bath, rooms, sq,
             <button className="absolute z-50 right-4 top-4 bg-white p-1 hover:text-black">
                 <MdFavoriteBorder className="text-[#DA5C5C] text-xl hover:scale-125 duration-200" />
             </button>
-            <span className="hover:text-blue-300 absolute right-4 top-4">hello</span>
             <div className="h-[8rem] rounded-tr-md rounded-tl-md relative" style={{background: `url(${image})`, backgroundSize: 'cover', backgroundPosition: 'center'}}>
                 <div className="bg-primaryColor text-xs absolute left-3 bottom-3 text-white px-2 py-1">
                     {'\u0024'}{price}

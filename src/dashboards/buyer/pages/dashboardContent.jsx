@@ -5,7 +5,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { ClipLoader } from "react-spinners";
 import BuyerPropertyCard from "../components/PropertyCard";
 import BuyerPropertyPreview from "../components/propertyPreview";
-import { properties } from "../../../assets/data/data";
+// import { properties } from "../../../assets/data/data";
 import { BuyerContext } from "../../../context/buyerContext";
 
 const DashboardContent = () => {
@@ -22,7 +22,7 @@ const DashboardContent = () => {
     const [showUploadd, setShowUpload] = useState(false)
 
     //gets the set property image preview so as to set it true when images is clicked, then displays the previews
-    const { setPropertyImagePreview } = useContext(BuyerContext)
+    const { setPropertyImagePreview, properties } = useContext(BuyerContext)
 
     //opens the modal property preview
     const showPreview = (id) => {
@@ -57,9 +57,9 @@ const DashboardContent = () => {
     return (
         <div className="relative">
             <MenuBar handleUpload={() => setShowUpload(true)} />
-            <div className="grid grid-cols-3 gap-5 mx-5">
+            <div className="grid grid-cols-3 2xl:grid-cols-4 gap-5 mx-5">
                 {properties.map((property, index) => (
-                    <BuyerPropertyCard key={index} image={property.image} title={property.title} desc={property.desc} location={property.location} bed={property.bed} bath={property.bath} rooms={property.rooms} sq={property.sq} price={property.price} id={property.id} handleClick={() => showPreview(property.id)}  />
+                    <BuyerPropertyCard key={index} image={property.thumbnail_url} title={property.title} desc={property.description} location={property.location} bed={property.bed} bath={property.bath} rooms={property.room} sq={property.square_meter} price={property.price} id={property.id} handleClick={() => showPreview(property.id)}  />
                 ))}
             </div>
             {showProperty && (

@@ -4,13 +4,15 @@ import { RiSofaFill } from "react-icons/ri";
 import { BiArea } from "react-icons/bi";
 import { LiaTimesSolid } from "react-icons/lia";
 import { useContext } from "react";
-import { properties } from "../../../assets/data/data";
 import { MdFavoriteBorder } from "react-icons/md";
+import { BuyerContext } from "../../../context/buyerContext";
 
 const BuyerPropertyPreview = ({closePreview, id, handleImagesClick}) => {
 
     //passed a prop that get the id of the property been cicked
     const item_id = id
+
+    const { properties } = useContext(BuyerContext)
 
     //get all information of the item been clicked using the id
     const property = properties.filter(property => property.id === item_id)
@@ -25,13 +27,15 @@ const BuyerPropertyPreview = ({closePreview, id, handleImagesClick}) => {
                     {property.map((prop, index) => {
 
                         //store all property images in a new variable
-                        const gallery = prop.gallery
+                        const gallery = prop.property_images
+
+                        console.log(gallery)
                         
                         return (
                             <div className="flex flex-col gap-5" key={index}>
                                 <div className="flex gap-2 cursor-pointer h-40 overflow-auto hover:border-2 hover:border-primaryColor" onClick={() => handleImagesClick(gallery)}>
                                     {gallery.map((gal, index) => (
-                                        <img key={index} src={gal} alt="" className="rounded-md" />
+                                        <img key={index} src={gal.image_url} alt="" className="rounded-md" />
                                     ))}
                                 </div>
                                 <div className="flex flex-col gap-2">

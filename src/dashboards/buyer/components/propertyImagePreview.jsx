@@ -17,6 +17,7 @@ const PropertyImagePreview = () => {
 
     // gets the property images been added to the state in the BuyerContext from dashboardContent
     const images = propertyImagePreview
+    console.log(images)
 
     const handleNext = () => {
         if(index < (images.length - 1)) {
@@ -33,7 +34,7 @@ const PropertyImagePreview = () => {
     }
 
     return (
-        <div className="fixed left-0 top-0 bg-white w-screen h-screen z-50 flex flex-col justify-center items-center">
+        <div className="fixed left-0 top-0 bg-white py-5 w-screen h-screen z-50 flex flex-col justify-center items-center">
             <div className="h-full w-auto flex justify-center gap-2 items-center">
                 <button onClick={handlePrev} className={index < 1 ? 'cursor-not-allowed text-[#AAAAAA]' : 'hover:text-primaryColor'} >
                     <GrCaretPrevious className="text-2xl" />
@@ -48,9 +49,9 @@ const PropertyImagePreview = () => {
                             initial={{x: direction === 'next' ? 300 : -300}}
                             animate={{x: 0}}
                             exit={{x: direction === 'next' ? -300 : 300}}
-                            transition={{duration: 0.3, type: 'spring', stiffness: 150, damping: 30}}
+                            transition={{duration: 0.2, type: 'tween', ease: 'easeInOut' }}
                             key={index}
-                            src={images[index]} 
+                            src={images[index].image_url} 
                             alt="property images" 
                             className="object-contain h-auto w-auto min-h-[95%] min-w-[95%] max-h-[95%] max-w-[95%]" 
                         />

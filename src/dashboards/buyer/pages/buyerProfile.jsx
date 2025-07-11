@@ -1,6 +1,6 @@
 const BuyerProfile = () => {
     return (
-        <>Agent Profile</>
+        <>Buyer Profile</>
     );
 }
  
