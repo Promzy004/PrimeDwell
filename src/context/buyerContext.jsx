@@ -7,7 +7,27 @@ export const BuyerContext = createContext()
 const BuyerContextProvider = ({children}) => {
 
     const [ propertyImagePreview, setPropertyImagePreview ] = useState([])
-    const [ showPropertyImagePreview, setShowPropertyImagePeview ] = useState()
+    const { loading } = useContext(AuthContext);
+    const [fetching, setFetching] = useState(true)
+    const [ properties, setProperties ] = useState([])
+
+    //state to a particular page that would be used to request from backend
+    const [ page, setPage ] = useState(1)
+
+    //state to store the limit range for each page
+    const [ perPage, setPerPage ] = useState(1)
+
+    //state to store the total items in of all page
+    const [ totalPage, setTotalPage ] = useState(0)
+
+    //state to store the beginning of each page
+    const [ from, setFrom ] = useState(0)
+    
+    //state to store the total count for each page
+    const [ to, setTo ] = useState(0)
+
+    const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms))
+
     // const [status, setStatus] = useState('all')
     // const [update, setUpdate] = useState('')
     // const [properties, setProperties] = useState([])
@@ -70,9 +90,40 @@ const BuyerContextProvider = ({children}) => {
 
     // const handleImagesClick
 
+    const fetchProperties = async (signal) => {
+        setFetching(true)
+
+        await delay(2000)
+
+        try{
+            //request to get all properties for admin
+            const response = await axios.get(`http://127.0.0.1:8000/api/buyer-all-properties`,{
+                signal: signal
+            })
+            // console.log(response?.data?.data)
+            setProperties(response?.data?.data)
+            // setTotalPage(response.data.property.total)
+            // setPerPage(response.data.property.per_page)
+            // setFrom(response.data.property.from)
+            // setTo(response.data.property.to)
+            setFetching(false);
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+    useEffect(() => {
+        const controller = new AbortController()
+        if(loading == 100) {
+            fetchProperties(controller.signal)
+        }
+
+        return () => controller.abort()
+    }, [loading ])
+
 
     return (
-        <BuyerContext.Provider value={{ propertyImagePreview, setPropertyImagePreview }}>
+        <BuyerContext.Provider value={{ propertyImagePreview, setPropertyImagePreview, properties, fetching }}>
             {children}
         </BuyerContext.Provider>
     );
