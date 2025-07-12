@@ -29,6 +29,8 @@ const AdminContextProvider = ({children}) => {
     //state to store the total count for each page
     const [ to, setTo ] = useState(0)
 
+    const [ updateMessage, setUpdateMessage ] = useState('')
+
     const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms))
 
     const fetchProperties = async (signal) => {
@@ -75,6 +77,12 @@ const AdminContextProvider = ({children}) => {
                 status: update_status
             });
             setUpdateTrigger(prev => prev + 1)
+
+            setUpdateMessage(res?.data?.message)
+
+            setTimeout(() => {
+                setUpdateMessage('')
+            }, 2000)
             console.log(res)
         } catch (error) {
             console.log(error)
@@ -82,7 +90,7 @@ const AdminContextProvider = ({children}) => {
     }
 
     return (
-        <AdminContext.Provider value={{setStatus, status, properties, setUpdate, fetching, handleUpdate , setPage, page, perPage, totalPage, from, to}}>
+        <AdminContext.Provider value={{setStatus, status, properties, setUpdate, fetching, handleUpdate , setPage, page, perPage, totalPage, from, to, updateMessage}}>
             {children}
         </AdminContext.Provider>
     );
