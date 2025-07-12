@@ -17,7 +17,7 @@ const SideBar = ({menu, setActivePage}) => {
         setActivePage(page)
 
         //save title for clicked in item in menu to session storage
-        sessionStorage.getItem('currentPage', page)
+        sessionStorage.setItem('currentPage', page)
     }
 
     useEffect(() => {
