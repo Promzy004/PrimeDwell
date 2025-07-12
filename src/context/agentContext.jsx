@@ -53,11 +53,15 @@ const AgentContextProvider = ({children}) => {
         }
     }
 
+    console.log(page)
+
     //useEffect for fetch properties
     useEffect(() => {
 
-        //returns null when loading is equal to 100
-        if(loading == 100) return;
+        //returns null when loading is not equal to 100
+        if(loading !== 100) return;
+
+        console.log(user)
 
         const controller = new AbortController()
         //runs immediately loading is equal to 100, can't be added to the conditional statement so as to prevent
@@ -66,7 +70,7 @@ const AgentContextProvider = ({children}) => {
 
         return () => controller.abort()
 
-    }, [status, update, loading])
+    }, [status, update, loading, page])
 
 
     return (
