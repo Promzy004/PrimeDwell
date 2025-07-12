@@ -26,6 +26,8 @@ const BuyerContextProvider = ({children}) => {
     //state to store the total count for each page
     const [ to, setTo ] = useState(0)
 
+    const [ favoriteMessage, setFavoriteMessage ] = useState('')
+
     const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms))
 
     // const [status, setStatus] = useState('all')
@@ -100,12 +102,11 @@ const BuyerContextProvider = ({children}) => {
             const response = await axios.get(`http://127.0.0.1:8000/api/buyer-all-properties`,{
                 signal: signal
             })
-            // console.log(response?.data?.data)
             setProperties(response?.data?.data)
-            // setTotalPage(response.data.property.total)
-            // setPerPage(response.data.property.per_page)
-            // setFrom(response.data.property.from)
-            // setTo(response.data.property.to)
+            setTotalPage(response?.data?.data?.total)
+            setPerPage(response?.data?.data?.per_page)
+            setFrom(response?.data?.data?.from)
+            setTo(response?.data?.data?.to)
             setFetching(false);
         } catch (error) {
             console.log(error)
@@ -122,8 +123,25 @@ const BuyerContextProvider = ({children}) => {
     }, [loading ])
 
 
+    const handleFavorite = async (property_id) => {
+        try {
+            const response = await axios.post(`http://127.0.0.1:8000/api/favorite/${property_id}`)
+
+            setFavoriteMessage(response?.data?.message)
+
+            setTimeout(() => {
+                setFavoriteMessage('')
+            }, 2000)
+
+            console.log(response)
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+
     return (
-        <BuyerContext.Provider value={{ propertyImagePreview, setPropertyImagePreview, properties, fetching }}>
+        <BuyerContext.Provider value={{ propertyImagePreview, setPropertyImagePreview, properties, fetching, handleFavorite, favoriteMessage, page, setPage, perPage, totalPage, from, to }}>
             {children}
         </BuyerContext.Provider>
     );
