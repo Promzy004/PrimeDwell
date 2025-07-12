@@ -4,10 +4,10 @@ import { RiSofaFill } from "react-icons/ri";
 import { BiArea } from "react-icons/bi";
 import { LiaTimesSolid } from "react-icons/lia";
 import { useContext } from "react";
-import { MdFavoriteBorder } from "react-icons/md";
+import { MdFavorite, MdFavoriteBorder } from "react-icons/md";
 import { BuyerContext } from "../../../context/buyerContext";
 
-const BuyerPropertyPreview = ({closePreview, id, handleImagesClick}) => {
+const BuyerPropertyPreview = ({closePreview, id, handleImagesClick, favorited}) => {
 
     //passed a prop that get the id of the property been cicked
     const item_id = id
@@ -83,9 +83,16 @@ const BuyerPropertyPreview = ({closePreview, id, handleImagesClick}) => {
                                                 </span>
                                             </span>
                                         </div>
-                                        <button className="right-4 top-4 hover:text-black">
-                                            <MdFavoriteBorder className="text-[#DA5C5C] text-3xl hover:scale-125 duration-200" />
-                                        </button>
+                                        {favorited ?
+                                            <button className="right-4 top-4 hover:text-black">
+                                                <MdFavorite className="text-[#DA5C5C] text-3xl hover:scale-125 duration-200" />
+                                            </button>
+                                            :
+                                            <button className="right-4 top-4 hover:text-black">
+                                                <MdFavoriteBorder className="text-[#DA5C5C] text-3xl hover:scale-125 duration-200" />
+                                            </button>
+                                        
+                                    }
                                     </div>
                                 </div>
                             </div>
