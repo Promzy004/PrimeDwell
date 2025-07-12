@@ -5,6 +5,7 @@ import AdminPropertyCard from "../components/card/property";
 import { AdminContext } from "../../../context/adminContext";
 import { ClipLoader } from "react-spinners";
 import AdminPropertyPreview from "../components/card/propertyPreview";
+import { motion, AnimatePresence } from "framer-motion";
 
 
 const DashboardSection = () => {
@@ -17,7 +18,7 @@ const DashboardSection = () => {
     const [showProperty, setShowProperty] = useState(false)
 
     //destructure the admin context to get this information
-    const { properties, fetching, handleUpdate, page, setPage, perPage, totalPage, from, to } = useContext(AdminContext)
+    const { properties, fetching, handleUpdate, page, setPage, perPage, totalPage, from, to, updateMessage } = useContext(AdminContext)
 
 
     //opens the modal preview
@@ -105,6 +106,19 @@ const DashboardSection = () => {
     return (
         <div className="relative pb-10">
             <MenuBar/>
+            <AnimatePresence>
+                {(updateMessage !== '') && (
+                        <motion.div 
+                            initial={{y: '-100%', opacity: 0}}
+                            animate={{y: 0, opacity: 1}}
+                            exit={{y: '-100%', opacity: 0}}
+                            transition={{delay: 0.5, duration: 0.3, type:'tween', ease: 'easeOut'}}
+                            className="fixed left-[48%] top-20 z-50 "
+                        >
+                            <span className={`bg-neutral-200 drop-shadow-md rounded-md px-7 py-3 opacity-95 text-lg ${updateMessage == 'Property Approved' ? 'text-[#60B849]' : 'text-[#B41C11]'}`}>{updateMessage}</span>
+                        </motion.div>
+                )}
+            </AnimatePresence>
             {fetching ? 
                 <div className="flex justify-center items-center my-32">
                     <ClipLoader color="#3498db" loading={fetching} size={40} />
