@@ -30,67 +30,6 @@ const BuyerContextProvider = ({children}) => {
 
     const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms))
 
-    // const [status, setStatus] = useState('all')
-    // const [update, setUpdate] = useState('')
-    // const [properties, setProperties] = useState([])
-
-    // const { loading, user } = useContext(AuthContext);
-    // const [ fetching, setFetching ] = useState(true)
-
-    // //state to a particular page that would be used to request from backend
-    // const [ page, setPage ] = useState(1)
-
-    // //state to store the limit range for each page
-    // const [ perPage, setPerPage ] = useState(1)
-
-    // //state to store the total items in of all page
-    // const [ totalPage, setTotalPage ] = useState(0)
-
-    // //state to store the beginning of each page
-    // const [ from, setFrom ] = useState(0)
-    
-    // //state to store the total count for each page
-    // const [ to, setTo ] = useState(0)
-
-
-
-    // const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms))
-    // // Fetching agent properties individually
-    // const fetchProperties = async (signal) => {
-        
-    //     setFetching(true)
-    //     const agentId = user.id
-    //     await delay(2000)
-    //     try{
-    //         const response = await axios.get(`http://127.0.0.1:8000/api/agent-properties/${agentId}?status=${status}&page=${page}`, {
-    //             signal: signal
-    //         })
-    //         setProperties(response?.data?.property?.data)
-    //         setTotalPage(response.data.property.total)
-    //         setPerPage(response.data.property.per_page)
-    //         setFrom(response.data.property.from)
-    //         setTo(response.data.property.to)
-    //         setFetching(false)
-    //     } catch (error) {
-    //         console.log(error)
-    //         setFetching(false)
-    //     }
-    // }
-
-    // //useEffect for fetch properties
-    // useEffect(() => {
-    //     const controller = new AbortController()
-    //     if(loading == 100) {
-    //         fetchProperties(controller.signal)
-    //     }
-
-    //     return () => controller.abort()
-
-    // }, [status, update, loading])
-
-    // setStatus, status, properties, setUpdate, fetching, setPage, page, perPage, totalPage, from, to, 
-
-    // const handleImagesClick
 
     const fetchProperties = async (signal) => {
         setFetching(true)
@@ -113,32 +52,14 @@ const BuyerContextProvider = ({children}) => {
         }
     }
 
-    // const fetchFavorites = async (signal) => {
-    //     setFetching(true)
-
-    //     await delay(2000)
-
-    //     try{
-    //         //request to get all favorited properties for buyer
-    //         const response = await axios.get(`http://127.0.0.1:8000/api/favorite`,{
-    //             signal: signal
-    //         })
-    //         setProperties(response?.data?.data)
-    //         setTotalPage(response?.data?.data?.total)
-    //         setPerPage(response?.data?.data?.per_page)
-    //         setFrom(response?.data?.data?.from)
-    //         setTo(response?.data?.data?.to)
-    //         setFetching(false);
-    //     } catch (error) {
-    //         console.log(error)
-    //     }
-    // }
-
     useEffect(() => {
+        //returns null when loading is equal to 100
+        if(loading == 100) return;
+
         const controller = new AbortController()
-        if(loading == 100) {
-            fetchProperties(controller.signal)
-        }
+        //runs immediately loading is equal to 100, can't be added to the conditional statement so as to prevent
+        //fetching api cancels, which would be done by return controller.abort()
+        fetchProperties(controller.signal)
 
         return () => controller.abort()
     }, [loading ])

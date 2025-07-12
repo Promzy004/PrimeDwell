@@ -55,10 +55,14 @@ const AgentContextProvider = ({children}) => {
 
     //useEffect for fetch properties
     useEffect(() => {
+
+        //returns null when loading is equal to 100
+        if(loading == 100) return;
+
         const controller = new AbortController()
-        if(loading == 100) {
-            fetchProperties(controller.signal)
-        }
+        //runs immediately loading is equal to 100, can't be added to the conditional statement so as to prevent
+        //fetching api cancels, which would be done by return controller.abort()
+        fetchProperties(controller.signal)
 
         return () => controller.abort()
 
