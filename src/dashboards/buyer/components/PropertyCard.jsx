@@ -5,18 +5,24 @@ import { RiSofaFill } from "react-icons/ri";
 import { BiArea } from "react-icons/bi";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
-import { MdFavoriteBorder } from "react-icons/md";
+import { MdFavorite, MdFavoriteBorder } from "react-icons/md";
 
 
-const BuyerPropertyCard = ({ image, title, desc, location, bed, bath, rooms, sq, price, id, handleClick}) => {
+const BuyerPropertyCard = ({ image, title, desc, location, bed, bath, rooms, sq, price, id, handleClick, favorite, handleFavorite }) => {
 
 
 
     return (
         <div className="grid relative grid-cols-1 cursor-pointer bg-white drop-shadow-md break-words whitespace-normal rounded-md hover:scale-105 duration-500" style={{hyphens: 'auto'}} onClick={handleClick}>
-            <button className="absolute z-50 right-4 top-4 bg-white p-1 hover:text-black">
-                <MdFavoriteBorder className="text-[#DA5C5C] text-xl hover:scale-125 duration-200" />
-            </button>
+            {favorite ? 
+                <button className="absolute z-50 right-4 top-4 bg-white p-1 hover:text-black">
+                    <MdFavorite className="text-[#DA5C5C] text-xl hover:scale-125 duration-200" onClick={handleFavorite} />
+                </button>
+                :
+                <button className="absolute z-50 right-4 top-4 bg-white p-1 hover:text-black">
+                    <MdFavoriteBorder className="text-[#DA5C5C] text-xl hover:scale-125 duration-200" onClick={handleFavorite} />
+                </button>
+            }
             <div className="h-[8rem] rounded-tr-md rounded-tl-md relative" style={{background: `url(${image})`, backgroundSize: 'cover', backgroundPosition: 'center'}}>
                 <div className="bg-primaryColor text-xs absolute left-3 bottom-3 text-white px-2 py-1">
                     {'\u0024'}{price}
