@@ -79,9 +79,11 @@ const Dashboard = () => {
         }
     }
 
+    console.log(properties.length)
+
 
     return (
-        <div className="relative">
+        <div className="relative pb-10">
             <MenuBar handleUpload={() => setShowUpload(true)} />
             <AnimatePresence>
                 {(uploadSuccess !== '') && (
@@ -119,7 +121,7 @@ const Dashboard = () => {
                     }
                 </>
             }
-            {properties.length > 15 && (
+            {totalPage > 15 && (
                 <div className="flex justify-between items-center mb-12 mt-16">
                     <div className="text-[#444] text-sm">Showing {from} to {to} of {totalPage} results</div>
                     <div className="flex justify-center items-center drop-shadow-sm">

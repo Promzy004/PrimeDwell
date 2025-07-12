@@ -135,7 +135,7 @@ const Favorite = () => {
                 </>
             }
 
-            {properties.length > 15 && (
+            {totalPage > 15 && (
                 <div className="flex justify-between items-center mb-12 mt-16">
                     <div className="text-[#444] text-sm">Showing {from} to {to} of {totalPage} results</div>
                     <div className="flex justify-center items-center drop-shadow-sm">
