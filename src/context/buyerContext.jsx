@@ -98,7 +98,7 @@ const BuyerContextProvider = ({children}) => {
         await delay(2000)
 
         try{
-            //request to get all properties for admin
+            //request to get all properties for buyer
             const response = await axios.get(`http://127.0.0.1:8000/api/buyer-all-properties`,{
                 signal: signal
             })
@@ -112,6 +112,27 @@ const BuyerContextProvider = ({children}) => {
             console.log(error)
         }
     }
+
+    // const fetchFavorites = async (signal) => {
+    //     setFetching(true)
+
+    //     await delay(2000)
+
+    //     try{
+    //         //request to get all favorited properties for buyer
+    //         const response = await axios.get(`http://127.0.0.1:8000/api/favorite`,{
+    //             signal: signal
+    //         })
+    //         setProperties(response?.data?.data)
+    //         setTotalPage(response?.data?.data?.total)
+    //         setPerPage(response?.data?.data?.per_page)
+    //         setFrom(response?.data?.data?.from)
+    //         setTo(response?.data?.data?.to)
+    //         setFetching(false);
+    //     } catch (error) {
+    //         console.log(error)
+    //     }
+    // }
 
     useEffect(() => {
         const controller = new AbortController()
