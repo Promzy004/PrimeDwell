@@ -53,8 +53,8 @@ const BuyerContextProvider = ({children}) => {
     }
 
     useEffect(() => {
-        //returns null when loading is equal to 100
-        if(loading == 100) return;
+        //returns null when loading is not equal to 100
+        if(loading !== 100) return;
 
         const controller = new AbortController()
         //runs immediately loading is equal to 100, can't be added to the conditional statement so as to prevent
@@ -62,7 +62,7 @@ const BuyerContextProvider = ({children}) => {
         fetchProperties(controller.signal)
 
         return () => controller.abort()
-    }, [loading ])
+    }, [loading, page ])
 
 
     const handleFavorite = async (property_id) => {
