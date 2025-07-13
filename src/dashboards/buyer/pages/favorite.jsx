@@ -118,20 +118,26 @@ const Favorite = () => {
                 </div>
                 :
                 <>
-                    <div className="grid grid-cols-3 2xl:grid-cols-4 gap-5 mx-5">
-                        {favoritedProperties.map((property, index) => (
-                            <BuyerPropertyCard key={index} image={property.thumbnail_url} title={property.title} desc={property.description} location={property.location} bed={property.bed} bath={property.bath} rooms={property.room} sq={property.square_meter} price={property.price} id={property.id} handleClick={() => showPreview(property.id)} favorite={property.favorited} handleFavorite={(e) => handleFavoriteClick(e, property.id)}   />
-                        ))}
-                    </div>
-                    {showProperty && (
-                        <div>
-                            {property.favorited ?
-                                <BuyerPropertyPreview id={selectedId} closePreview={() => setShowProperty(false)} favorited={property.favorited} handleImagesClick={handlePreviewImages}/>
-                                :
-                                <BuyerPropertyPreview id={selectedId} closePreview={() => setShowProperty(false)} favorited={property.favorited} handleImagesClick={handlePreviewImages}/>
-                            }
-                        </div>
-                    )}
+                    {favoritedProperties < 1 ?
+                        <div>No Properties Found</div>
+                        :
+                        <>
+                            <div className="grid grid-cols-3 2xl:grid-cols-4 gap-5 mx-5">
+                                {favoritedProperties.map((property, index) => (
+                                    <BuyerPropertyCard key={index} image={property.thumbnail_url} title={property.title} desc={property.description} location={property.location} bed={property.bed} bath={property.bath} rooms={property.room} sq={property.square_meter} price={property.price} id={property.id} handleClick={() => showPreview(property.id)} favorite={property.favorited} handleFavorite={(e) => handleFavoriteClick(e, property.id)}   />
+                                ))}
+                            </div>
+                            {showProperty && (
+                                <div>
+                                    {property.favorited ?
+                                        <BuyerPropertyPreview id={selectedId} closePreview={() => setShowProperty(false)} favorited={property.favorited} handleImagesClick={handlePreviewImages}/>
+                                        :
+                                        <BuyerPropertyPreview id={selectedId} closePreview={() => setShowProperty(false)} favorited={property.favorited} handleImagesClick={handlePreviewImages}/>
+                                    }
+                                </div>
+                            )}
+                        </>    
+                    }
                 </>
             }
 
