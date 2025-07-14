@@ -12,7 +12,7 @@ const PublicRoute = () => {
 
   //navigate to home page when user is authenticated i.e it also navigate to home page when buyer logs in
   if (user && user.role === 'buyer') {
-    return <Navigate to="/" />;
+    return <Navigate to="/buyer-dashboard" />;
   }
 
   //navigate to home page when user is authenticated i.e it also navigate to agent dashboard
