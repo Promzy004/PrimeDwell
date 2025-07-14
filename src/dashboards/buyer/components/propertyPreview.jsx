@@ -3,9 +3,10 @@ import { FaBath } from "react-icons/fa6";
 import { RiSofaFill } from "react-icons/ri";
 import { BiArea } from "react-icons/bi";
 import { LiaTimesSolid } from "react-icons/lia";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { MdFavorite, MdFavoriteBorder } from "react-icons/md";
 import { BuyerContext } from "../../../context/buyerContext";
+import ContactAgentModal from "./contactAgentModal";
 
 const BuyerPropertyPreview = ({closePreview, id, handleImagesClick, favorited}) => {
 
@@ -13,6 +14,8 @@ const BuyerPropertyPreview = ({closePreview, id, handleImagesClick, favorited}) 
     const item_id = id
 
     const { properties } = useContext(BuyerContext)
+
+    const [ contactAgentModal, setContactAgentModal ] = useState(false)
 
     //get all information of the item been clicked using the id
     const property = properties.filter(property => property.id === item_id)
@@ -28,8 +31,6 @@ const BuyerPropertyPreview = ({closePreview, id, handleImagesClick, favorited}) 
 
                         //store all property images in a new variable
                         const gallery = prop.property_images
-
-                        console.log(gallery)
                         
                         return (
                             <div className="flex flex-col gap-5" key={index}>
@@ -99,9 +100,12 @@ const BuyerPropertyPreview = ({closePreview, id, handleImagesClick, favorited}) 
                         )
                     })}
                 </div>
-                <button onClick={closePreview} className="self-end border-[1.5px] text-white border-none bg-primaryColor px-7 py-[3px] rounded-md text-sm mt-4">
+                <button onClick={() => setContactAgentModal(true)} className="self-end border-[1.5px] text-white border-none bg-primaryColor px-7 py-[3px] rounded-md text-sm mt-4">
                     Contact Agent
                 </button>
+                {contactAgentModal && (
+                    <ContactAgentModal propertyClicked={property} closeContactModal={() =>setContactAgentModal(false)} />
+                )}
             </div>
         </div>
     );
