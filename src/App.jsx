@@ -60,19 +60,20 @@ function App() {
                 <Route path="/faqs" element={<FAQs />} />
 
                 <Route element={<ProtectedRoute allowedRoles={['buyer']} />} >
+                  <Route path="/" element={<BuyerDashboard />}>
+                    <Route path="buyer-dashboard" element={<DashboardContent />} />
+                    <Route path="buyer-dashboard/favorite" element={<Favorite />} />
+                    <Route path="buyer-dashboard/contact" element={<ContactUs />} />
+                    <Route path="buyer-dashboard/agent-details" element={<DashboardAgentDetails />} />
+                    <Route path="buyer-dashboard/profile" element={<BuyerProfile />} />
+                    {/* <Route path="agent-dashboard/buyers" element={<AgentBuyers />} />
+                    <Route path="agent-dashboard/profile" element={<AgentProfile />} /> */}
+                  </Route>
                   <Route path="/property-details/:id" element={<PropertyDetails />} />
                   <Route path="/agent-details/:id" element={<AgentDetails />} />
                 </Route>
 
-                <Route path="/" element={<BuyerDashboard />}>
-                  <Route path="buyer-dashboard" element={<DashboardContent />} />
-                  <Route path="buyer-dashboard/favorite" element={<Favorite />} />
-                  <Route path="buyer-dashboard/contact" element={<ContactUs />} />
-                  <Route path="buyer-dashboard/agent-details" element={<DashboardAgentDetails />} />
-                  <Route path="buyer-dashboard/profile" element={<BuyerProfile />} />
-                  {/* <Route path="agent-dashboard/buyers" element={<AgentBuyers />} />
-                  <Route path="agent-dashboard/profile" element={<AgentProfile />} /> */}
-                </Route>
+            
 
               
                 <Route element={<ProtectedRoute allowedRoles={['agent']} />} >
