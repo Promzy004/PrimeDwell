@@ -15,7 +15,7 @@ const ProtectedRoute = ({allowedRoles}) => {
   }
   if (!allowedRoles.includes(user.role)) {
     if(user.role === 'buyer'){
-      return <Navigate to="/" />
+      return <Navigate to="/buyer-dashboard" />
     } else if (user.role === 'agent'){
       return <Navigate to="/agent-dashboard" />
     } else {
