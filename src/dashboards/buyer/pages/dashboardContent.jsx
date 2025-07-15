@@ -128,9 +128,9 @@ const DashboardContent = () => {
                             {showProperty && (
                                 <div>
                                     {property.favorited ?
-                                        <BuyerPropertyPreview id={selectedId} closePreview={() => setShowProperty(false)} favorited={property.favorited} handleImagesClick={handlePreviewImages}/>
+                                        <BuyerPropertyPreview id={selectedId} closePreview={() => setShowProperty(false)} favorited={property.favorited} handleImagesClick={handlePreviewImages} handleFavorite={(e) => handleFavoriteClick(e, property.id)}/>
                                         :
-                                        <BuyerPropertyPreview id={selectedId} closePreview={() => setShowProperty(false)} favorited={property.favorited} handleImagesClick={handlePreviewImages}/>
+                                        <BuyerPropertyPreview id={selectedId} closePreview={() => setShowProperty(false)} favorited={property.favorited} handleImagesClick={handlePreviewImages} handleFavorite={(e) => handleFavoriteClick(e, property.id)}/>
                                     }
                                 </div>
                             )}
