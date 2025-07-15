@@ -98,7 +98,7 @@ const Favorite = () => {
 
 
     return (
-        <>
+        <div className="pb-10">
             <AnimatePresence>
                 {(favoriteMessage !== '') && (
                         <motion.div 
@@ -153,7 +153,7 @@ const Favorite = () => {
                     </div>
                 </div>
             )}
-        </>
+        </div>
     );
 }
  
