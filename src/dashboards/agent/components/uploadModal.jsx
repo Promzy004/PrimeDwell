@@ -140,6 +140,7 @@ const UploadModal = ({closeUpload, setUploaded}) => {
                 }, 2000);
                 setImages(prev => [...prev, []])
             } catch (error) {
+                setProgress(0)
                 setErrors(error?.response?.data?.errors)
                 // console.log(error.response.data.message)
             }
