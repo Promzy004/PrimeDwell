@@ -6,6 +6,8 @@ export const BuyerContext = createContext()
 
 const BuyerContextProvider = ({children}) => {
 
+    const [ updateFetch, setUpdateFetch ] = useState(0)
+
     const [ propertyImagePreview, setPropertyImagePreview ] = useState([])
     const { loading } = useContext(AuthContext);
     const [fetching, setFetching] = useState(true)
@@ -62,15 +64,15 @@ const BuyerContextProvider = ({children}) => {
         fetchProperties(controller.signal)
 
         return () => controller.abort()
-    }, [loading, page ])
+    }, [loading, page, updateFetch ])
 
 
     const handleFavorite = async (property_id) => {
         try {
             const response = await axios.post(`http://127.0.0.1:8000/api/favorite/${property_id}`)
 
+            setUpdateFetch(prev => prev + 1)
             setFavoriteMessage(response?.data?.message)
-
             setTimeout(() => {
                 setFavoriteMessage('')
             }, 2000)
