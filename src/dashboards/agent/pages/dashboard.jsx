@@ -119,20 +119,20 @@ const Dashboard = () => {
                             )}
                         </>
                     }
+                    {totalPage > 15 && (
+                        <div className="flex justify-between items-center mb-12 mt-16">
+                            <div className="text-[#444] text-sm">Showing {from} to {to} of {totalPage} results</div>
+                            <div className="flex justify-center items-center drop-shadow-sm">
+                                <button className={`px-5 py-1 border border-[#dadada] text-sm rounded-l-md text-center hover:bg-[#e0e0e0] duration-300 ${page < 2 ? 'bg-[#f9f9f9] text-[#AAAAAA] cursor-not-allowed' : 'text-[#444] bg-[#f1f1f1]' }`} onClick={handlePrev}>prev</button>
+                                {paginate_values.map((paginate, index)=> (
+                                    <button key={index} className={`px-5 py-1 text-sm border border-[#dadada] duration-300 ${paginate === page ? 'bg-primaryColor text-white': 'bg-[#f1f1f1] hover:bg-[#e0e0e0] text-[#444]'}`} onClick={()=> setPage(paginate)}>{paginate}</button>
+                                ))}
+                                <button className={`px-5 py-1 border border-[#dadada] text-sm rounded-r-md text-center hover:bg-[#e0e0e0] duration-300 ${page === paginate_values.length ? 'bg-[#f9f9f9] text-[#AAAAAA] cursor-not-allowed' : 'text-[#444] bg-[#f1f1f1]' }`} onClick={handleNext}>next</button>
+                            </div>
+                        </div>
+                    )}
                 </>
             }
-            {totalPage > 15 && (
-                <div className="flex justify-between items-center mb-12 mt-16">
-                    <div className="text-[#444] text-sm">Showing {from} to {to} of {totalPage} results</div>
-                    <div className="flex justify-center items-center drop-shadow-sm">
-                        <button className={`px-5 py-1 border border-[#dadada] text-sm rounded-l-md text-center hover:bg-[#e0e0e0] duration-300 ${page < 2 ? 'bg-[#f9f9f9] text-[#AAAAAA] cursor-not-allowed' : 'text-[#444] bg-[#f1f1f1]' }`} onClick={handlePrev}>prev</button>
-                        {paginate_values.map((paginate, index)=> (
-                            <button key={index} className={`px-5 py-1 text-sm border border-[#dadada] duration-300 ${paginate === page ? 'bg-primaryColor text-white': 'bg-[#f1f1f1] hover:bg-[#e0e0e0] text-[#444]'}`} onClick={()=> setPage(paginate)}>{paginate}</button>
-                        ))}
-                        <button className={`px-5 py-1 border border-[#dadada] text-sm rounded-r-md text-center hover:bg-[#e0e0e0] duration-300 ${page === paginate_values.length ? 'bg-[#f9f9f9] text-[#AAAAAA] cursor-not-allowed' : 'text-[#444] bg-[#f1f1f1]' }`} onClick={handleNext}>next</button>
-                    </div>
-                </div>
-            )}
             {showUploadd && (
                 <UploadModal closeUpload={() => setShowUpload(false)} setUploaded={setUploadSuccess} />
             )}
