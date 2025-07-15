@@ -8,7 +8,7 @@ import { MdFavorite, MdFavoriteBorder } from "react-icons/md";
 import { BuyerContext } from "../../../context/buyerContext";
 import ContactAgentModal from "./contactAgentModal";
 
-const BuyerPropertyPreview = ({closePreview, id, handleImagesClick, favorited}) => {
+const BuyerPropertyPreview = ({closePreview, id, handleImagesClick, favorited, handleFavorite}) => {
 
     //passed a prop that get the id of the property been cicked
     const item_id = id
@@ -85,11 +85,11 @@ const BuyerPropertyPreview = ({closePreview, id, handleImagesClick, favorited}) 
                                             </span>
                                         </div>
                                         {favorited ?
-                                            <button className="right-4 top-4 hover:text-black">
+                                            <button className="right-4 top-4 hover:text-black" onClick={handleFavorite}>
                                                 <MdFavorite className="text-[#DA5C5C] text-3xl hover:scale-125 duration-200" />
                                             </button>
                                             :
-                                            <button className="right-4 top-4 hover:text-black">
+                                            <button className="right-4 top-4 hover:text-black" onClick={handleFavorite}>
                                                 <MdFavoriteBorder className="text-[#DA5C5C] text-3xl hover:scale-125 duration-200" />
                                             </button>
                                         
